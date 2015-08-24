@@ -1,7 +1,7 @@
 # miner
 Filesize recursive data miner
 
-Usage: miner -r [root directory] [-v [verbose level]]
+Usage: miner -r [root directory] [-v [verbose level]]\n
  -r, --root [directory]      root directory
  -v, --verbose [level]       verbose level
                                0 - show nothing (default)
