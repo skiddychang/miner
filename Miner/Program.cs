@@ -13,27 +13,70 @@ namespace Miner
         static String Root = String.Empty;
         static void Main(String[] args)
         {
+            if (args.Length == 0)
+            {
+                Usage();
+                return;
+            }
             for (int i = 0; i < args.Length; i++)
             {
                 switch (args[i])
                 {
                     case "--verbose":
                     case "-v":
-                        Verbose = Int16.Parse(args[i + 1]);
+                        try
+                        {
+                            Verbose = Int16.Parse(args[i + 1]);
+                        }
+                        catch
+                        {
+                            Error("invalid verbose level");
+                            return;
+                        }
                         break;
                     case "--root":
                     case "-r":
-                        Root = args[i + 1];
+                        try
+                        {
+                            Root = args[i + 1];
+                        }
+                        catch
+                        {
+                            Error("invalid path specified");
+                            return;
+                        }
                         break;
                     case "--help":
                     case "-h":
-                        Console.WriteLine("Under construction...");
+                        Usage();
                         return;
                 }
 
             }
-            Console.WriteLine("Output: " + SearchDir(Root) / 1024 + "K");
+            try
+            {
+                Console.WriteLine("Output: " + SearchDir(Root) / 1024 + "K");
+            }
+            catch
+            {
+                Error("invalid path specified and/or no access privileges");
+            }
+        }
 
+        static void Error(String Message)
+        {
+            Console.WriteLine(String.Format("miner: {0}", Message));
+        }
+
+        static void Usage()
+        {
+            Console.WriteLine(@"Usage: miner -r [root directory] [-v [verbose level]]
+ -r, --root [directory]      root directory
+ -v, --verbose [level]       verbose level
+                               0 - show nothing (default)
+                               1 - show directories
+                               2 - show directories and/or files
+ -h, --help                  this page");
         }
 
         static long SearchDir(String DirName)
@@ -52,7 +95,7 @@ namespace Miner
             {
                 Sum += SearchDir(Dir);
             }
-            if(Verbose > 0)
+            if (Verbose > 0)
             {
                 Console.WriteLine(String.Format("miner: DIR: {0} - {1}K", DirName, Sum / 1024));
             }
