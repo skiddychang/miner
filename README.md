@@ -1,4 +1,4 @@
-# miner 
+# miner
 Filesize recursive data miner
 
 Usage: miner -r [root directory] [-v [verbose level]]
