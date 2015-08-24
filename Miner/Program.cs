@@ -51,7 +51,6 @@ namespace Miner
                         Usage();
                         return;
                 }
-
             }
             try
             {
