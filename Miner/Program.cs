@@ -88,7 +88,7 @@ namespace Miner
                 Sum += Info.Length;
                 if (Verbose == 2)
                 {
-                    Console.WriteLine(String.Format("miner: FILE: {0} - {1}K ({2}K)", File, Info.Length / 1024, Sum / 1024));
+                    Console.WriteLine(String.Format("FILE: {0} - {1}K ({2}K)", File, Info.Length / 1024, Sum / 1024));
                 }
             }
             foreach (String Dir in Directory.GetDirectories(DirName))
@@ -97,7 +97,7 @@ namespace Miner
             }
             if (Verbose > 0)
             {
-                Console.WriteLine(String.Format("miner: DIR: {0} - {1}K", DirName, Sum / 1024));
+                Console.WriteLine(String.Format("DIR: {0} - {1}K", DirName, Sum / 1024));
             }
             return Sum;
         }
